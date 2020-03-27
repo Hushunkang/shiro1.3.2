@@ -62,7 +62,7 @@ public class Quickstart {
         // 测试当前用户是否已经被认证，即是否已经登录
         // 调用Subject的isAuthenticated()方法
         if (!currentUser.isAuthenticated()) {
-        	// 把用户名和密码封装成UsernamePasswordToken类的对象实例
+        	// 若没有认证，则把用户名和密码封装成UsernamePasswordToken类的对象实例
             UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa");
             // 记住我
             token.setRememberMe(true);

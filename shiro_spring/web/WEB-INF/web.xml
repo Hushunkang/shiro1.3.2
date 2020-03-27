@@ -3,4 +3,55 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <!-- needed for ContextLoaderListener -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring.xml</param-value>
+    </context-param>
+
+    <!-- Bootstraps the root web application context before servlet initialization -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- 配置DispatcherServlet，spring mvc的核心控制器是一个Servlet，即DispatcherServlet -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 使用contextConfigLocation来配置spring mvc的配置文件 -->
+        <!--
+		    实际上也可以不通过contextConfigLocation来配置spring mvc的配置文件, 而使用默认的配置文件
+			默认的配置文件为：/WEB-INF/<servlet-name>-servlet.xml，此处即为/WEB-INF/dispatcher-servlet.xml
+		-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- Shiro Filter is defined in the spring application context -->
+    <!--
+    1.配置Shiro的Shiro Filter
+    2.DelegatingFilterProxy实际上是Filter的一个代理对象，默认情况下，Spring会到IOC容器中查找和
+    <filter-name>对应的filter bean，也可以通过targetBeanName的初始化参数来配置filter bean的id
+    -->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

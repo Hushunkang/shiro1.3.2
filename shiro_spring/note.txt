@@ -1,0 +1,26 @@
+I：
+1、获取当前的Subject，调用SecurityUtils.getSubject()方法
+
+2、校验当前用户是否已经被认证，即是否已经登录，调用Subject的isAuthenticated()方法
+
+3、若没有认证，则把用户名和密码封装成UsernamePasswordToken类的对象实例
+1）、创建一个表单页面
+2）、把请求提交到spring mvc的Handler（业务逻辑控制器）
+3）、获取用户名和密码
+
+4、执行登录，调用Subject的login()方法执行登录，能不能登录成功取决于shiro.ini配置文件是否配置了lonestarr/vespa
+
+5、自定义Realm（用于获取安全实体数据源），从数据库中获取对应的记录，返回给Shiro
+1）、实际上是要继承org.apache.shiro.realm.AuthorizingRealm类
+2）、实现doGetAuthenticationInfo(AuthenticationToken var1)方法
+
+6、由Shiro完成密码比对
+
+II：
+密码比对
+通过AuthenticatingRealm的credentialsMatcher属性来进行的密码比对
+
+III：
+1、如何把一个原始字符串进行md5加密
+2、替换当前Realm的credentialsMatcher属性，直接使用HashedCredentialsMatcher对象，并设置加密算法即可
+
