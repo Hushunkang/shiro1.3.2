@@ -23,7 +23,7 @@
                 <ref bean="secondRealm"/>
             </list>
         </property>
-        <property name="rememberMeManager.cookie.maxAge" value="10"/>
+<!--        <property name="rememberMeManager.cookie.maxAge" value="10"/>-->
     </bean>
 
     <!-- Let's use some enterprise caching support for better performance.  You can replace this with any enterprise
@@ -43,10 +43,12 @@
         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
     </bean>
 
-    <bean id="authenticator"
-          class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+    <!-- 配置认证器 -->
+    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        <!-- 多Realm情况下，认证策略 -->
         <property name="authenticationStrategy">
-            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
+            <!-- 内部参考/引用bean，不能被外部的bean引用，只能在内部使用，可以不用设置id，此处为调用AtLeastOneSuccessfulStrategy空参构造器来创建Bean的对象实例 -->
+            <bean class="org.apache.shiro.authc.pam.AllSuccessfulStrategy"/>
         </property>
     </bean>
 
@@ -54,7 +56,7 @@
          Many other realm implementations can be used too (PropertiesRealm,
          LdapRealm, etc. -->
     <!--
-    3.配置 Realm，直接配置实现了 org.apache.shiro.realm.Realm 接口的 bean
+    3.配置Realm，直接配置实现了org.apache.shiro.realm.Realm接口的bean
     -->
     <bean id="jdbcRealm" class="com.atguigu.shiro.realms.ShiroRealm">
         <property name="credentialsMatcher">
@@ -112,11 +114,11 @@
     -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/WEB-INF/login.jsp"/>
-        <property name="successUrl" value="/WEB-INF/list.jsp"/>
-        <property name="unauthorizedUrl" value="/WEB-INF/unauthorized.jsp"/>
+        <property name="loginUrl" value="/login.jsp"/>
+        <property name="successUrl" value="/list.jsp"/>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
 
-        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
+<!--        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>-->
 
         <!--
         	配置哪些页面需要受保护以及访问这些页面需要的权限
@@ -125,32 +127,27 @@
         	3). logout 用户注销，测试的时候要使用到注销，要不然会发现密码输入错误也能登陆成功，是因为用到了shiro的缓存
         	4). roles  角色过滤器
         -->
-        <!--
         <property name="filterChainDefinitions">
             <value>
-                /WEB-INF/login.jsp = anon
+                /login.jsp = anno
 
-                /shiro/login = anon
+                /shiro/login = authc
                 /shiro/logout = logout
-
-                /user.jsp = roles[user]
-                /admin.jsp = roles[admin]
 
                 # everything else requires authentication
                 /** = authc
             </value>
         </property>
-        -->
     </bean>
 
     <!-- 配置一个 bean，该bean实际上是一个Map，通过实例工厂方法的方式 -->
-    <bean id="filterChainDefinitionMap"
-          factory-bean="filterChainDefinitionMapBuilder" factory-method="buildFilterChainDefinitionMap"/>
+<!--    <bean id="filterChainDefinitionMap"-->
+<!--          factory-bean="filterChainDefinitionMapBuilder" factory-method="buildFilterChainDefinitionMap"/>-->
 
-    <bean id="filterChainDefinitionMapBuilder"
-          class="com.atguigu.shiro.factory.FilterChainDefinitionMapBuilder"/>
+<!--    <bean id="filterChainDefinitionMapBuilder"-->
+<!--          class="com.atguigu.shiro.factory.FilterChainDefinitionMapBuilder"/>-->
 
-    <bean id="shiroService"
-          class="com.atguigu.shiro.services.ShiroService"/>
+<!--    <bean id="shiroService"-->
+<!--          class="com.atguigu.shiro.services.ShiroService"/>-->
 
 </beans>

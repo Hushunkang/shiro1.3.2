@@ -15,8 +15,11 @@ public class ShiroRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		System.out.println("[FirstReaml] doGetAuthenticationInfo");
+
 		//1. 把AuthenticationToken强转为UsernamePasswordToken
 		UsernamePasswordToken upToken = (UsernamePasswordToken) token;
+		System.out.println("2..." + token.hashCode());
 
 		//2. 从UsernamePasswordToken中获取username
 		String username = upToken.getUsername();
@@ -40,7 +43,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		//1). principal：认证的实体信息，可以是username，也可以是数据表对应的用户的实体类对象
 		Object principal = username;
 		//2). credentials：密码，从数据库中查询出来
-		Object credentials = null; //"fc1709d0a95a6be30bc5926fdb7f22f4"
+		Object credentials = null;
 		if("admin".equals(username)){
 			credentials = "038bdaf98f2037b31f1e75b5b4c9b26e";
 		}else if("user".equals(username)){
@@ -54,9 +57,10 @@ public class ShiroRealm extends AuthorizingRealm {
 		SimpleAuthenticationInfo info;//new SimpleAuthenticationInfo(principal, credentials, realmName);
 		info = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
 
-		//总结：upToken封装了前端的用户名和密码信息，info封装了从数据库中查询到的用户名和密码信息
+		//upToken封装了前端的用户名和密码信息，info封装了从数据库中查询到的用户名和密码信息
 		//由Shiro完成密码比对
 		//md5盐值加密，可以确保两个人密码一样但最终保存到数据库中两个人密码的字符串却不一样，这样更安全
+		//一般用什么来作为盐呢？用一个唯一的字符串。。。
 
 		return info;
 	}
