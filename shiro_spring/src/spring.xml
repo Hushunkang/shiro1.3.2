@@ -118,7 +118,7 @@
         <property name="successUrl" value="/list.jsp"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
 
-<!--        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>-->
+        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
 
         <!--
         	配置哪些页面需要受保护以及访问这些页面需要的权限
@@ -130,26 +130,26 @@
         	           evict：移除，赶出
         	4). roles  角色过滤器，用户有对应的角色才可以访问资源
         -->
-        <property name="filterChainDefinitions">
-            <value>
-                /login.jsp = anon
-                /shiro/login = anon
-                /shiro/logout = logout
-                /admin.jsp = roles[admin]
-                /user.jsp = roles[user]
-                # everything else requires authentication
-                # /** = authc 配置在最后，如果配置在前面会覆盖后面配置，Shiro的URL权限采用第一次匹配优先方式
-                /** = authc
-            </value>
-        </property>
+<!--        <property name="filterChainDefinitions">-->
+<!--            <value>-->
+<!--                /login.jsp = anon-->
+<!--                /shiro/login = anon-->
+<!--                /shiro/logout = logout-->
+<!--                /admin.jsp = roles[admin]-->
+<!--                /user.jsp = roles[user]-->
+<!--                # everything else requires authentication-->
+<!--                # /** = authc 配置在最后，如果配置在前面会覆盖后面配置，Shiro的URL权限采用第一次匹配优先方式-->
+<!--                /** = authc-->
+<!--            </value>-->
+<!--        </property>-->
     </bean>
 
-    <!-- 配置一个 bean，该bean实际上是一个Map，通过实例工厂方法的方式 -->
-<!--    <bean id="filterChainDefinitionMap"-->
-<!--          factory-bean="filterChainDefinitionMapBuilder" factory-method="buildFilterChainDefinitionMap"/>-->
+    <!-- 配置一个bean，该bean实际上是一个Map，通过实例工厂方法的方式 -->
+    <bean id="filterChainDefinitionMap"
+          factory-bean="filterChainDefinitionMapBuilder" factory-method="buildFilterChainDefinitionMap"/>
 
-<!--    <bean id="filterChainDefinitionMapBuilder"-->
-<!--          class="com.atguigu.shiro.factory.FilterChainDefinitionMapBuilder"/>-->
+    <bean id="filterChainDefinitionMapBuilder"
+          class="com.atguigu.shiro.factory.FilterChainDefinitionMapBuilder"/>
 
     <bean id="shiroService"
           class="com.atguigu.shiro.services.ShiroService"/>
