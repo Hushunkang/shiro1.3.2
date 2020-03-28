@@ -26,16 +26,19 @@ public class SecondRealm extends AuthenticatingRealm {
 		Object principal = username;
 		Object credentials = null;
 		if("admin".equals(username)){
-			credentials = "ce2f6417c7e1d32c1d81a797ee0b499f87c5de06---";
+			credentials = "ce2f6417c7e1d32c1d81a797ee0b499f87c5de06";
+//			credentials = "ce2f6417c7e1d32c1d81a797ee0b499f87c5de06---";//造数据，故意让密码校验失败（前端密码和数据库密码不一致），测试认证策略
 		}else if("user".equals(username)){
-			credentials = "073d4c3ae812935f23cb3f2a71943f49e082a718---";
+			credentials = "073d4c3ae812935f23cb3f2a71943f49e082a718";
+//			credentials = "073d4c3ae812935f23cb3f2a71943f49e082a718---";//造数据，故意让密码校验失败（前端密码和数据库密码不一致），测试认证策略
 		}
 
 		String realmName = getName();
 		ByteSource credentialsSalt = ByteSource.Util.bytes(username);
 
 		SimpleAuthenticationInfo info;
-		info = new SimpleAuthenticationInfo("secondRealmName", credentials, credentialsSalt, realmName);
+//		info = new SimpleAuthenticationInfo("secondRealmName", credentials, credentialsSalt, realmName);
+		info = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
 		return info;
 	}
 

@@ -26,6 +26,9 @@
         <br/><br/>
     </shiro:hasRole>
 
+    <a href="shiro/testShiroAnnotation">Test Shiro Annotation</a>
+    <br/><br/>
+
     <a href="shiro/logout">Logout</a>
     <br/><br/>
 

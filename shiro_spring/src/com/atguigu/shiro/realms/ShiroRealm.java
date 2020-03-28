@@ -83,10 +83,10 @@ public class ShiroRealm extends AuthorizingRealm {
 		//1. 从PrincipalCollection中来获取登录用户的信息
 		Object principal = principals.getPrimaryPrincipal();//底层是一个LinkedHashMap，存储有序的，这里面拿到的就是第一个realm中的principal
 
-		Set<String> realmNames = principals.getRealmNames();
+		Set<String> realmNames = principals.getRealmNames();//Realm配置了多个，但是不一定都会认证成功，这里面认证成功多少个，这个Set集合中就有多少个数据元素
 
 		for (String realmName : realmNames) {
-			System.out.println("realName是:" + realmName + ",它里面的principal是:" + principals.fromRealm(realmName));
+			System.out.println("当前Realm的realName是:" + realmName + ",它里面的principal是:" + principals.fromRealm(realmName));
 		}
 
 		//2. 利用登录用户的信息来获取当前登录用户的权限或角色（如果登录用户的信息里面不包含权限和角色信息的话，那就要去查询数据库）
@@ -95,7 +95,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		if("admin".equals(principal)){
 			roles.add("admin");
 		}
-		//效果：如果你用user这个用户登录的话，只有user这一个角色；如果你用admin这个用户登录的话，不仅有user这个角色，还有admin这个角色
+		//效果：如果你用user这个用户登录的话，只有user这一个角色，如果你用admin这个用户登录的话，不仅有user这个角色，还有admin这个角色
 
 		//3. 创建SimpleAuthorizationInfo,并设置其roles属性
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);

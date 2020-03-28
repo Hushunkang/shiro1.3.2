@@ -124,7 +124,10 @@
         	配置哪些页面需要受保护以及访问这些页面需要的权限
         	1). anon   可以被匿名访问
         	2). authc  必须认证（即登录）后才可能访问的页面
-        	3). logout 用户注销，测试的时候要使用到注销，要不然会发现密码输入错误也能登陆成功，是因为用到了shiro的缓存
+        	3). logout 用户注销
+        	           注意一个细节，测试的时候切换用户一定要logout一下，要不然你会发现用户名和密码输入错误也可以登录成功
+        	           是因为用到了shiro的缓存，你不管怎么登录用的都是缓存里面的用户，因此需要logout一下，给缓存中的用户evict一下
+        	           evict：移除，赶出
         	4). roles  角色过滤器，用户有对应的角色才可以访问资源
         -->
         <property name="filterChainDefinitions">
@@ -148,7 +151,7 @@
 <!--    <bean id="filterChainDefinitionMapBuilder"-->
 <!--          class="com.atguigu.shiro.factory.FilterChainDefinitionMapBuilder"/>-->
 
-<!--    <bean id="shiroService"-->
-<!--          class="com.atguigu.shiro.services.ShiroService"/>-->
+    <bean id="shiroService"
+          class="com.atguigu.shiro.services.ShiroService"/>
 
 </beans>
