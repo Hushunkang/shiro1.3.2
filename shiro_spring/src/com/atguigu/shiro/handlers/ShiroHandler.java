@@ -39,7 +39,7 @@ public class ShiroHandler {
 		if (!currentUser.isAuthenticated()) {
 			// 若没有认证，则把用户名和密码封装成UsernamePasswordToken类的对象实例
 			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-			// 记住我
+			// 记住我，原理是在客户端生成了一个Cookie
 			token.setRememberMe(true);
 			try {
 				System.out.println("1..." + token.hashCode());
