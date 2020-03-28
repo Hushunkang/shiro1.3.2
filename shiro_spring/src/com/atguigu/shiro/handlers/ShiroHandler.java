@@ -1,5 +1,7 @@
 package com.atguigu.shiro.handlers;
 
+import com.atguigu.shiro.constant.Config;
+import com.atguigu.shiro.exceptions.SystemException;
 import com.atguigu.shiro.services.ShiroService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -20,7 +22,12 @@ public class ShiroHandler {
 	private ShiroService shiroService;
 
 	@RequestMapping("/testShiroAnnotation")
-	public String testShiroAnnotation(HttpSession session){
+	public String testShiroAnnotation(HttpSession session,Integer userId) throws SystemException {
+
+		if(userId == null){
+			throw new SystemException(Config.INVALIDATION,"用户名不能为空");
+		}
+
 		session.setAttribute("key", "value123456");
 		shiroService.testMethod();
 		return "redirect:/login.jsp";
