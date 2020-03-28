@@ -45,7 +45,7 @@
 
     <!-- 配置ModularRealmAuthenticator认证器 -->
     <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
-        <!-- 多Realm情况下，认证策略 -->
+        <!-- 多Realm情况下的认证策略，AtLeastOneSuccessfulStrategy表示至少有一个Realm你认证成功了，那么就算你认证成功，即登录成功 -->
         <property name="authenticationStrategy">
             <!-- 内部参考/引用bean，不能被外部的bean引用，只能在内部使用，可以不用设置id，此处为调用AtLeastOneSuccessfulStrategy空参构造器来创建Bean的对象实例 -->
             <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>

@@ -34,7 +34,7 @@ public class SecondRealm extends AuthenticatingRealm {
 		String realmName = getName();
 		ByteSource credentialsSalt = ByteSource.Util.bytes(username);
 
-		SimpleAuthenticationInfo info = null;
+		SimpleAuthenticationInfo info;
 		info = new SimpleAuthenticationInfo("secondRealmName", credentials, credentialsSalt, realmName);
 		return info;
 	}

@@ -55,7 +55,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		//4). 盐值
 		ByteSource credentialsSalt = ByteSource.Util.bytes(username);
 
-		SimpleAuthenticationInfo info;//new SimpleAuthenticationInfo(principal, credentials, realmName);
+		SimpleAuthenticationInfo info;
 		info = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
 
 		//upToken封装了前端的用户名和密码信息，info封装了从数据库中查询到的用户名和密码信息

@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Hushunkang
@@ -13,12 +14,20 @@
 <body>
     <h4>List Page...</h4>
 
-    <a href="admin.jsp">Admin Page。。。</a>
-    <br/><br/>
+    Welcome:<shiro:principal></shiro:principal>
 
-    <a href="user.jsp">User Page。。。</a>
-    <br/><br/>
+    <shiro:hasRole name="admin">
+        <a href="admin.jsp">Admin Page。。。</a>
+        <br/><br/>
+    </shiro:hasRole>
+
+    <shiro:hasRole name="user">
+        <a href="user.jsp">User Page。。。</a>
+        <br/><br/>
+    </shiro:hasRole>
 
     <a href="shiro/logout">Logout</a>
+    <br/><br/>
+
 </body>
 </html>
