@@ -3,8 +3,15 @@ package com.atguigu.shiro.factory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 使用实例工厂方法来配置bean：需要事先创建工厂本身的对象实例，然后再调用实例工厂方法
+ */
 public class FilterChainDefinitionMapBuilder {
 
+	/**
+	 * 实例工厂方法
+	 * @return
+	 */
 	public Map<String, String> buildFilterChainDefinitionMap(){
 		Map<String, String> map = new LinkedHashMap<>();
 
