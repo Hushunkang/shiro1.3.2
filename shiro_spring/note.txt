@@ -11,7 +11,7 @@ I：
 4、执行登录，调用Subject的login()方法执行登录，能不能登录成功取决于shiro.ini配置文件是否配置了lonestarr/vespa
 
 5、自定义Realm（用于获取安全实体数据源），从数据库中获取对应的记录，返回给Shiro
-1）、实际上是要继承org.apache.shiro.realm.AuthorizingRealm类
+1）、实际上是要继承org.apache.shiro.realm.AuthenticatingRealm类
 2）、实现doGetAuthenticationInfo(AuthenticationToken var1)方法
 
 6、由Shiro完成密码比对
@@ -31,3 +31,9 @@ IV：
 2)、使用ByteSource.Util.bytes()来计算盐值
 3)、盐值需要唯一，一般使用随机字符串或userId
 4)、使用new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations)来计算盐值加密后的密码的值
+
+V：
+1、认证的Realm需要继承AuthenticatingRealm类，实现它的doGetAuthenticationInfo方法
+2、授权的Realm需要继承AuthenticatingRealm类的一个子类，实现它的doGetAuthorizationInfo方法
+2、授权需要继承 AuthorizingRealm 类, 并实现其 doGetAuthorizationInfo 方法
+3、AuthorizingRealm类继承自AuthenticatingRealm类，但没有实现AuthenticatingRealm类中的doGetAuthenticationInfo方法，所以认证和授权只需要继承AuthorizingRealm类就可以了，同时实现他的两个抽象方法

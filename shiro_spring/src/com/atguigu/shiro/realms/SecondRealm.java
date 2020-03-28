@@ -40,7 +40,7 @@ public class SecondRealm extends AuthenticatingRealm {
 	}
 
 	public static void main(String[] args) {
-		String hashAlgorithmName = "SHA1";//哈希算法名称，MD5加密算法其实是一种哈希算法，还有sha算法家族也是哈希算法的一种
+		String hashAlgorithmName = "SHA1";
 		Object credentials = "123456";
 		Object salt = ByteSource.Util.bytes("user");
 		int hashIterations = 1024;

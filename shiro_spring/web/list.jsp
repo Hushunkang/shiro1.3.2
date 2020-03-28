@@ -13,6 +13,12 @@
 <body>
     <h4>List Page...</h4>
 
+    <a href="admin.jsp">Admin Page。。。</a>
+    <br/><br/>
+
+    <a href="user.jsp">User Page。。。</a>
+    <br/><br/>
+
     <a href="shiro/logout">Logout</a>
 </body>
 </html>
