@@ -35,5 +35,5 @@ IV：
 V：
 1、认证的Realm需要继承AuthenticatingRealm类，实现它的doGetAuthenticationInfo方法
 2、授权的Realm需要继承AuthenticatingRealm类的一个子类，实现它的doGetAuthorizationInfo方法
-2、授权需要继承 AuthorizingRealm 类, 并实现其 doGetAuthorizationInfo 方法
+2、授权需要继承AuthorizingRealm类, 并实现其doGetAuthorizationInfo方法
 3、AuthorizingRealm类继承自AuthenticatingRealm类，但没有实现AuthenticatingRealm类中的doGetAuthenticationInfo方法，所以认证和授权只需要继承AuthorizingRealm类就可以了，同时实现他的两个抽象方法
