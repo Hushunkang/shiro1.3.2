@@ -4,7 +4,7 @@ package com.atguigu.shiro.exceptions;
  * @author hskBeginner Email：2752962035@qq.com
  * @version 1.0
  * @description
- * @create 2020年03月28日 11时35分13秒
+ * @create 2020年03月28日
  */
 public class SystemException extends Exception {
 

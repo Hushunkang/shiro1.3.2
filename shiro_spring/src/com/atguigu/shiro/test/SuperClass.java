@@ -4,7 +4,7 @@ package com.atguigu.shiro.test;
  * @author hskBeginner Email：2752962035@qq.com
  * @version 1.0
  * @description
- * @create 2020年03月28日 13时27分09秒
+ * @create 2020年03月28日
  */
 public class SuperClass {
 
